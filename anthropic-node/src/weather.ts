@@ -5,15 +5,21 @@ const getWeather = (location: string) => {
   return {
     location,
     temperature: 72,
+    unit: "fahrenheit",
     condition: "Sunny",
+    humidity: 45,
   };
 };
 
 const getForecase = (location: string) => {
   return {
     location,
-    temperature: 72,
-    condition: "Sunny",
+    unit: "fahrenheit",
+    days: [
+      { day: "Today", high: 74, low: 61, condition: "Sunny" },
+      { day: "Tomorrow", high: 70, low: 58, condition: "Partly cloudy" },
+      { day: "Day after tomorrow", high: 65, low: 55, condition: "Rain" },
+    ],
   };
 };
 
@@ -34,7 +40,7 @@ const tools: Anthropic.Tool[] = [
   },
   {
     name: "get_forecast",
-    description: "Get the current forecase for a given location.",
+    description: "Get the 3-day weather forecast for a given location.",
     input_schema: {
       type: "object",
       properties: {
@@ -71,11 +77,14 @@ const messages: Anthropic.MessageParam[] = [
 let message = await client.messages.create({
   model: "claude-sonnet-4-6",
   max_tokens: 1024,
+  system: "You are a terse senior code reviewer. Reply in one short parapraph.",
   tools,
   messages,
 });
 
+let i = 0;
 while (message.stop_reason === "tool_use") {
+  console.log("message tooluse", i, message.content);
   messages.push({ role: "assistant", content: message.content });
 
   const toolResults: Anthropic.ToolResultBlockParam[] = [];
@@ -83,7 +92,10 @@ while (message.stop_reason === "tool_use") {
     if (block.type !== "tool_use") continue;
     console.log(`[tool] ${block.name}(${JSON.stringify(block.input)})`);
     try {
-      const result = runTool(block.name, block.input as Record<string, unknown>);
+      const result = runTool(
+        block.name,
+        block.input as Record<string, unknown>,
+      );
       toolResults.push({
         type: "tool_result",
         tool_use_id: block.id,
@@ -106,6 +118,8 @@ while (message.stop_reason === "tool_use") {
     tools,
     messages,
   });
+
+  i++;
 }
 
 for (const block of message.content) {
