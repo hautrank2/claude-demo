@@ -8,28 +8,21 @@ client = Anthropic()
 model = "claude-sonnet-4-6"
 
 
-def chat(content: str, system: str | None = None):
+def chat(content: str, temperature=1.0):
     params = {
         "model": model,
         "max_tokens": 1024,
         "messages": [{"role": "user", "content": content}],
+        "temperature": temperature,
     }
-
-    if system:
-        params["system"] = system
 
     message = client.messages.create(**params)
     return message.content[0].text
 
-system = """
-You are a patient math tutor.
-Do not directly answer a student's questions.
-Guide them to a solution step by step.
-"""
 
 answer = chat(
-    "How do I solve 5x + 2 = 3 for x ?",
-    system,
+    "Who will Ballon d'Or this year you predict ?",
+    0.1,
 )
 
 print("Answer:", answer)
