@@ -1,0 +1,26 @@
+:root {
+  /* Native scrollbars and form controls follow the system theme, like the colors below. */
+  color-scheme: light dark;
+  scrollbar-color: var(--muted) transparent;
+  --bg: #f6f5f1; --panel: #ffffff; --text: #1f1e1c; --muted: #77736b; --line: #e3e0d8;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #171614; --panel: #201f1c; --text: #ebe8e1; --muted: #99948a; --line: #34322d; }
+}
+* { box-sizing: border-box; scrollbar-width: thin; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+a { color: inherit; }
+
+.home { max-width: 720px; margin: 0 auto; padding: 40px 24px; }
+.home h1 { font-size: 22px; margin: 0 0 20px; }
+.home ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.home a {
+  display: block; padding: 14px 16px; text-decoration: none;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+}
+.home a:hover { border-color: var(--muted); }
+.home strong { display: block; }
+.home span { color: var(--muted); font-size: 14px; }

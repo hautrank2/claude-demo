@@ -7,13 +7,12 @@ from anthropic import Anthropic
 client = Anthropic()
 model = "claude-sonnet-4-6"
 
-
 def chat(content: str, temperature=1.0):
     params = {
         "model": model,
         "max_tokens": 1024,
         "messages": [{"role": "user", "content": content}],
-        "temperature": temperature,
+        "extra_body": {"temperature": temperature},
     }
 
     message = client.messages.create(**params)

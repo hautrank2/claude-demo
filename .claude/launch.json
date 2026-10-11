@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "claude-node",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["claude-node/node_modules/next/dist/bin/next", "dev", "claude-node"],
+      "port": 3000
+    }
+  ]
+}

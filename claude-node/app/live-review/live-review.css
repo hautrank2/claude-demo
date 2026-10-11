@@ -1,0 +1,77 @@
+.live-review {
+  --spelling: 214 69 65; --grammar: 217 119 6; --style: 37 99 235; --logic: 124 58 237; --content: 13 148 136;
+
+  header {
+    display: flex; align-items: baseline; gap: 16px;
+    max-width: 1200px; margin: 0 auto; padding: 20px 24px 12px;
+  }
+  h1 { font-size: 18px; margin: 0; }
+  .back { color: var(--muted); font-size: 13px; text-decoration: none; }
+  .back:hover { color: var(--text); }
+  #status, #usage { color: var(--muted); font-size: 13px; }
+  #usage { margin-left: auto; font-variant-numeric: tabular-nums; }
+  #status.error { color: rgb(var(--spelling)); }
+  main {
+    display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 20px; align-items: start;
+    max-width: 1200px; margin: 0 auto; padding: 0 24px 48px;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .column { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  label { font-size: 13px; font-weight: 600; }
+  .row { display: flex; align-items: center; gap: 8px; }
+  .row > :first-child { margin-right: auto; }
+  select {
+    font: inherit; font-size: 13px; padding: 3px 6px; border-radius: 6px;
+    border: 1px solid var(--line); background: var(--panel); color: var(--text);
+  }
+  label span { color: var(--muted); font-weight: 400; }
+  #brief {
+    width: 100%; margin-bottom: 10px; padding: 10px 14px; resize: vertical; outline: none;
+    background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 10px;
+    font: inherit; font-size: 14px;
+  }
+  #brief::placeholder { color: var(--muted); }
+
+  /* Textarea stacked on a mirror div that carries the highlights. */
+  .editor {
+    display: grid; min-height: 70vh;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  }
+  .editor > * {
+    grid-area: 1 / 1; margin: 0; padding: 24px 28px; border: 0;
+    font: 17px/1.75 Cambria, "Times New Roman", serif;
+    white-space: pre-wrap; overflow-wrap: break-word;
+  }
+  #backdrop { color: transparent; pointer-events: none; }
+  #text { resize: none; overflow: hidden; background: transparent; color: inherit; outline: none; }
+  #text::placeholder { color: var(--muted); }
+  mark {
+    color: transparent; border-radius: 2px;
+    background: rgb(var(--c) / .16); box-shadow: inset 0 -2px rgb(var(--c) / .8);
+  }
+  mark.active { background: rgb(var(--c) / .38); }
+  mark.stale { opacity: .45; }
+  .spelling { --c: var(--spelling); } .grammar { --c: var(--grammar); }
+  .style { --c: var(--style); } .logic { --c: var(--logic); } .content { --c: var(--content); }
+
+  #comments { display: flex; flex-direction: column; gap: 10px; position: sticky; top: 16px; }
+  .empty { color: var(--muted); font-size: 14px; padding: 8px 4px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-left: 3px solid rgb(var(--c));
+    border-radius: 8px; padding: 10px 12px; cursor: pointer;
+  }
+  .card.stale { opacity: .5; }
+  .card:hover { border-color: rgb(var(--c)); }
+  .badge { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: rgb(var(--c)); }
+  .quote { margin: 4px 0; font-family: Cambria, "Times New Roman", serif; overflow-wrap: anywhere; }
+  .quote s { color: var(--muted); }
+  .quote b { font-weight: 600; }
+  .message { font-size: 14px; color: var(--muted); }
+  .actions { display: flex; gap: 8px; margin-top: 8px; }
+  button {
+    font: inherit; font-size: 13px; padding: 3px 10px; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--line); background: transparent; color: var(--text);
+  }
+  button.primary { background: var(--text); color: var(--panel); border-color: var(--text); }
+}
