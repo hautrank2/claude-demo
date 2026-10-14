@@ -1,0 +1,4 @@
+month,region,forecast_revenue,lower_95,upper_95,slope_per_month,r_squared,last_actual_2026_06
+2026-07,North,458320,411666,504974,20948.6,0.927,444600
+2026-07,South,440440,410437,470443,12668.6,0.9182,429600
+2026-07,Total,898760,,,33617.2,,874200
