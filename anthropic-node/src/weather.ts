@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "./env.ts";
 import { Anthropic } from "@anthropic-ai/sdk";
 
 const getWeather = (location: string) => {

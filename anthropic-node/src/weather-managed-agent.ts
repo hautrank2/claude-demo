@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "./env.ts";
 import { Anthropic } from "@anthropic-ai/sdk";
 import { betaZodTool } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { z } from "zod";
